@@ -1,0 +1,29 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+        - routes/
+        - config/
+        - database/factories/
+        - database/seeders/
+    level: 6
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+        - '#Unsafe usage of new static#'
+
+    excludePaths:
+        - ./vendor/*
+        - ./storage/*
+        - ./bootstrap/cache/*
+        - ./node_modules/*
+
+    reportUnmatchedIgnoredErrors: false
+
+    # Configurações específicas do Laravel
+    scanDirectories:
+        - ./vendor/laravel/framework/src/Illuminate
+        - ./app
