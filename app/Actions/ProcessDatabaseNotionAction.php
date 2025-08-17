@@ -5,11 +5,12 @@
 namespace App\Actions;
 
 use Illuminate\Support\Facades\Log;
-use Notion;
+use \Notion as Notion;
+use App\Actions\ProcessPageNotionAction;
 
 final readonly class ProcessDatabaseNotionAction
 {
-    public function execute(string $databaseId, ProcessNotionPagesAction $processNotionPagesAction): array
+    public function execute(string $databaseId): array
     {
         try {
             $pageCollection = Notion::database($databaseId)->query();
@@ -17,7 +18,8 @@ final readonly class ProcessDatabaseNotionAction
             $collectionOfPages = $pageCollection->asCollection();
 
             foreach ($collectionOfPages as $page) {
-                $processNotionPagesAction->execute($page);
+                Log::error('processando : '.$page->getTitle());
+                app(ProcessPageNotionAction::class)->execute($page);
             }
         } catch (\Exception $e) {
             Log::error('Erro ao processar páginas do Notion: '.$e->getMessage());
@@ -28,8 +30,8 @@ final readonly class ProcessDatabaseNotionAction
             ];
         }
 
-        Log::info('Processamento concluído', $results);
+        Log::info('Processamento concluído');
 
-        return $results;
+        return [];
     }
 }

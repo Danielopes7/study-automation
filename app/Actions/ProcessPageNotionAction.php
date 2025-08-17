@@ -3,16 +3,19 @@
 namespace App\Actions;
 
 use App\Factories\StudyStatusFactory;
+use App\Services\NotionPageService;
 
-class ProcessNotionPagesAction
+class ProcessPageNotionAction
 {
     public function execute(object $page): array
     {
         $status = $page->getProperty('Status')->getContent()['name'];
 
-        $strategy = StudyStatusFactory::create($status);
-        $result = $strategy->process($page);
+        app(NotionPageService::class)->savePage($page); 
 
-        return $result;
+        // $strategy = StudyStatusFactory::create($status);
+        // $result = $strategy->process($page);
+
+        return [];
     }
 }
