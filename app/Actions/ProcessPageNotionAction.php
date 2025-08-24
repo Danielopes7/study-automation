@@ -11,10 +11,10 @@ class ProcessPageNotionAction
     {
         $status = $page->getProperty('Status')->getContent()['name'];
 
-        app(NotionPageService::class)->savePage($page); 
+        $page_db = app(NotionPageService::class)->savePage($page); 
 
-        // $strategy = StudyStatusFactory::create($status);
-        // $result = $strategy->process($page);
+        $strategy = StudyStatusFactory::create($status);
+        $strategy->process($page_db);
 
         return [];
     }

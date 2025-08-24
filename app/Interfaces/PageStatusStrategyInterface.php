@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Interfaces;
-
+use App\Models\NotionPage;
 interface PageStatusStrategyInterface
 {
-    /**
-     * Processa uma página do Notion
-     *
-     * @param  mixed  $page  Página do Notion
-     * @return array ['message' => string, 'data' => mixed]
-     */
-    public function process($page): array;
+    public function process(NotionPage $page);
+    public function calculatePriority(NotionPage $page): void;
+
 }
