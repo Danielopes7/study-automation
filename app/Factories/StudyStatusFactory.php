@@ -1,7 +1,5 @@
 <?php
 
-// App/Factories/StudyStatusFactory.php
-
 namespace App\Factories;
 
 use App\Actions\NotionStrategies\LearningStrategy;
