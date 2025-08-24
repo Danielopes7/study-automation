@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url');
             $table->text('content')->nullable();
             $table->enum('status', ['to_study', 'studying', 'reviewing', 'consolidated']);
-            $table->integer('level')->default(1);
+            $table->integer('priority')->default(1);
             $table->timestamp('created_at_notion');
             $table->timestamp('last_review')->nullable();
             $table->timestamp('next_review')->nullable();
