@@ -13,7 +13,7 @@ class UserSetting extends Model
         'strategy_learning',
         'strategy_reviewing',
         'strategy_solid_concept',
-        'max_notifications_per_day'
+        'max_notifications_per_day',
     ];
 
     protected $casts = [

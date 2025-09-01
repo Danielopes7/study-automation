@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Actions\ProcessDatabaseNotionAction;
 use Illuminate\Console\Command;
+
 class SyncNotionPagesCommand extends Command
 {
     /**

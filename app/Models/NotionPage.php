@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use App\Enums\NotionPageStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+
 class NotionPage extends Model
 {
     protected $fillable = [
@@ -14,7 +15,7 @@ class NotionPage extends Model
         'url',
         'created_at_notion',
         'status_change',
-        'priority'
+        'priority',
     ];
 
     public function interactions()
@@ -32,7 +33,8 @@ class NotionPage extends Model
         return $this->status === NotionPageStatus::TO_STUDY && $this->daysSinceStatusChange() >= 7;
     }
 
-    public function daysSinceStatusChange(){
+    public function daysSinceStatusChange()
+    {
         return Carbon::parse($this->status_change)->diffInDays(now());
     }
 }

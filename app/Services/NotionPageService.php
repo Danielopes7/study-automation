@@ -2,24 +2,22 @@
 
 namespace App\Services;
 
+use App\Enums\NotionPageStatus;
 use App\Models\NotionPage;
 use App\Models\NotionTag;
-use App\Models\NotionPageTag;
 use Illuminate\Support\Facades\DB;
-use App\Enums\NotionPageStatus;
 
 class NotionPageService
 {
     public function savePage(object $page): NotionPage
     {
         return DB::transaction(function () use ($page) {
-
             $pageArray = [
-                "notion_id" => $page->getId(),
-                "title" => $page->getTitle(),
-                "url" => $page->getUrl(),
-                "status" => NotionPageStatus::fromNotion($page->getProperty('Status')->getContent()['name']),
-                "created_at_notion" => $page->getCreatedTime(),
+                'notion_id' => $page->getId(),
+                'title' => $page->getTitle(),
+                'url' => $page->getUrl(),
+                'status' => NotionPageStatus::fromNotion($page->getProperty('Status')->getContent()['name']),
+                'created_at_notion' => $page->getCreatedTime(),
             ];
 
             $notionPage = NotionPage::updateOrCreate(['notion_id' => $pageArray['notion_id']], $pageArray);

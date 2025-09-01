@@ -6,7 +6,6 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Log;
 use \Notion as Notion;
-use App\Actions\ProcessPageNotionAction;
 
 final readonly class ProcessDatabaseNotionAction
 {

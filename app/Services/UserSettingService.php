@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -24,7 +24,7 @@ class UserSettingService
             'toLearn' => $this->settings->strategy_to_learn,
             'Learning' => $this->settings->strategy_learning,
             'Reviewing' => $this->settings->strategy_reviewing,
-            'SolidConcept' => $this->settings->strategy_solid_concept
+            'SolidConcept' => $this->settings->strategy_solid_concept,
         ];
     }
 
