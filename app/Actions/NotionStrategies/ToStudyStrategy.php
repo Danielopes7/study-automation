@@ -16,7 +16,7 @@ class ToStudyStrategy implements PageStatusStrategyInterface
     {
         $page->priority = 2;
 
-        if ($page->is_priority_for_study) {
+        if ($page->is_priority_to_study) {
             $page->priority = 1;
         }
 

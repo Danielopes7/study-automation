@@ -17,7 +17,7 @@ class StudyStatusFactory
             'Para Estudar' => new ToStudyStrategy(),
             'Estudando' => new LearningStrategy(),
             'Revisando' => new ReviewingStrategy(),
-            'Conceito Sólido' => new SolidConceptStrategy(),
+            'Conceitos Sólidos' => new SolidConceptStrategy(),
             default => throw new InvalidArgumentException("Status '{$status}' não suportado")
         };
     }

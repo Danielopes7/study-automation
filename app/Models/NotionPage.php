@@ -28,13 +28,28 @@ class NotionPage extends Model
         return $this->belongsToMany(NotionTag::class, 'notion_page_tags');
     }
 
-    public function getIsPriorityForStudyAttribute(): bool
+    public function getIsPriorityToStudyAttribute(): bool
     {
         return $this->status === NotionPageStatus::TO_STUDY && $this->daysSinceStatusChange() >= 7;
     }
 
+    public function getIsPriorityToReviewAttribute(): bool
+    {
+        return $this->status === NotionPageStatus::REVIEWING && $this->daysSinceStatusChange() >= 5;
+    }
+
+    public function getIsPriorityLearningAttribute(): bool
+    {
+        return $this->status === NotionPageStatus::STUDYING && $this->daysSinceStatusChange() >= 2;
+    }
+
+    public function getIsPriorityToSolidAttribute(): bool
+    {
+        return $this->status === NotionPageStatus::CONSOLIDATED && $this->daysSinceStatusChange() >= 30;
+    }
+
     public function daysSinceStatusChange()
     {
-        return Carbon::parse($this->status_change)->diffInDays(now());
+        return Carbon::parse($this->status_change ?? $this->created_at)->diffInDays(now());
     }
 }
