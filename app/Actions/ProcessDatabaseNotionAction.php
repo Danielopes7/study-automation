@@ -13,13 +13,20 @@ final readonly class ProcessDatabaseNotionAction
     {
         try {
             $pageCollection = Notion::database($databaseId)->query();
-
+            
             $collectionOfPages = $pageCollection->asCollection();
-
+            
             foreach ($collectionOfPages as $page) {
-                Log::error('processando : '.$page->getTitle());
+                Log::info('processando : '.$page->getTitle());
                 app(ProcessPageNotionAction::class)->execute($page);
             }
+
+            $page = app(ChoosePageToSendAction::class)->execute();
+            
+            if ($page){
+                $message = app(BuildMessageAction::class)->execute($page);
+            }
+
         } catch (\Exception $e) {
             Log::error('Erro ao processar páginas do Notion: '.$e->getMessage());
             $results['details'][] = [

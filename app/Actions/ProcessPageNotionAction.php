@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Factories\StudyStatusFactory;
 use App\Services\NotionPageService;
 
-class ProcessPageNotionAction
+final readonly class ProcessPageNotionAction
 {
     public function execute(object $page): array
     {
