@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\NotionStrategies;
+namespace App\Actions\BuildPromptStrategies;
 
 use App\Interfaces\StudyPromptStrategyInterface;
 use App\Models\NotionPage;

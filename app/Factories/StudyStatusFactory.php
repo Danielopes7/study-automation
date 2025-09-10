@@ -16,7 +16,7 @@ class StudyStatusFactory
         return match ($status) {
             'Para Estudar' => new ToStudyStrategy(),
             'Estudando' => new LearningStrategy(),
-            'Revisando' => new ReviewingStrategy(),
+            'Revisar' => new ReviewingStrategy(),
             'Conceitos Sólidos' => new SolidConceptStrategy(),
             default => throw new InvalidArgumentException("Status '{$status}' não suportado")
         };

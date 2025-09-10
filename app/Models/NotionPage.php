@@ -30,22 +30,22 @@ class NotionPage extends Model
 
     public function getIsPriorityToStudyAttribute(): bool
     {
-        return $this->status === NotionPageStatus::TO_STUDY && $this->daysSinceStatusChange() >= 7;
+        return $this->status === NotionPageStatus::TO_STUDY->value && $this->daysSinceStatusChange() >= 7;
     }
 
     public function getIsPriorityToReviewAttribute(): bool
     {
-        return $this->status === NotionPageStatus::REVIEWING && $this->daysSinceStatusChange() >= 5;
+        return $this->status === NotionPageStatus::REVIEWING->value && $this->daysSinceStatusChange() >= 5;
     }
 
     public function getIsPriorityLearningAttribute(): bool
     {
-        return $this->status === NotionPageStatus::STUDYING && $this->daysSinceStatusChange() >= 2;
+        return $this->status === NotionPageStatus::STUDYING->value && $this->daysSinceStatusChange() >= 2;
     }
 
     public function getIsPriorityToSolidAttribute(): bool
     {
-        return $this->status === NotionPageStatus::CONSOLIDATED && $this->daysSinceStatusChange() >= 30;
+        return $this->status === NotionPageStatus::CONSOLIDATED->value && $this->daysSinceStatusChange() >= 30;
     }
 
     public function daysSinceStatusChange()
