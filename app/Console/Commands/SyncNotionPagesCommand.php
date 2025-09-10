@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\ProcessDatabaseNotionAction;
+use App\Actions\OrchestrateNotionPagesAction;
 use Illuminate\Console\Command;
 
 class SyncNotionPagesCommand extends Command
@@ -26,6 +26,6 @@ class SyncNotionPagesCommand extends Command
      */
     public function handle()
     {
-        app(ProcessDatabaseNotionAction::class)->execute(ENV('NOTION_DATABASE_ID'));
+        app(OrchestrateNotionPagesAction::class)->execute(ENV('NOTION_DATABASE_ID'));
     }
 }
