@@ -7,7 +7,8 @@ use App\Services\NotionPageService;
 
 final readonly class ProcessPageNotionAction
 {
-    public function execute(object $page): array
+    //2 functions: save page to db, apply strategy
+    public function execute(object $page): void
     {
         $status = $page->getProperty('Status')->getContent()['name'];
 
@@ -16,6 +17,5 @@ final readonly class ProcessPageNotionAction
         $strategy = StudyStatusFactory::create($status);
         $strategy->process($page_db);
 
-        return [];
     }
 }
