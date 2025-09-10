@@ -12,7 +12,7 @@ final readonly class ChoosePageToSendAction
     public function execute() : NotionPage|null
     {
         $page = NotionPage::where('priority', 1)
-                ->orderByRaw('IFNULL(status_change, created_at) ASC')
+                ->orderByRaw('IFNULL(status_change, created_at_notion) ASC')
                 ->first();
 
         return $page;

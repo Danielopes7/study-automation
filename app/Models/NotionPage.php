@@ -42,7 +42,16 @@ class NotionPage extends Model
         $daysToAdd = $intervals[$this->repetitions] ?? 30;
         $this->repetitions = $this->repetitions + 1;
 
+        $weight = NotionPageStatus::from($this->status)->weight();
+        
+        $daysToAdd *= $weight;
+
         $this->next_review = now()->addDays($daysToAdd);
+    }
+
+    public function needsReview(): bool
+    {
+        return is_null($this->next_review) || $this->next_review <= now();
     }
 
     public function setPriority($priority)
@@ -52,22 +61,22 @@ class NotionPage extends Model
 
     public function getIsPriorityToStudyAttribute(): bool
     {
-        return $this->status === NotionPageStatus::TO_STUDY->value && $this->daysSinceStatusChange() >= 7;
+        return $this->status === NotionPageStatus::TO_STUDY->value && $this->daysSinceStatusChange() >= 7 && $this->needsReview();
     }
 
     public function getIsPriorityToReviewAttribute(): bool
     {
-        return $this->status === NotionPageStatus::REVIEWING->value && $this->daysSinceStatusChange() >= 5;
+        return $this->status === NotionPageStatus::REVIEWING->value && $this->daysSinceStatusChange() >= 5 && $this->needsReview();
     }
 
     public function getIsPriorityLearningAttribute(): bool
     {
-        return $this->status === NotionPageStatus::STUDYING->value && $this->daysSinceStatusChange() >= 2;
+        return $this->status === NotionPageStatus::STUDYING->value && $this->daysSinceStatusChange() >= 2 && $this->needsReview();
     }
 
     public function getIsPriorityToSolidAttribute(): bool
     {
-        return $this->status === NotionPageStatus::CONSOLIDATED->value && $this->daysSinceStatusChange() >= 30;
+        return $this->status === NotionPageStatus::CONSOLIDATED->value && $this->daysSinceStatusChange() >= 30 && $this->needsReview();
     }
 
     public function daysSinceStatusChange()

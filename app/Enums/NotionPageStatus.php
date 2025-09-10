@@ -19,4 +19,14 @@ enum NotionPageStatus: string
             default => null,
         };
     }
+
+    public function weight(): int
+    {
+        return match($this) {
+            self::TO_STUDY      => 2,
+            self::STUDYING      => 1,
+            self::REVIEWING     => 1,
+            self::CONSOLIDATED  => 4,
+        };
+    }
 }
