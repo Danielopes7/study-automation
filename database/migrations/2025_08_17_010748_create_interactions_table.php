@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('interactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('notion_page_id')->constrained()->cascadeOnDelete();
-            $table->string('user_phone');
-            $table->enum('type', ['quiz', 'feedback', 'study_session', 'motivation']);
+            $table->enum('type', ['message', 'question','reminder']);
+            $table->text('text')->nullable();
             $table->json('question')->nullable();
             $table->json('answer')->nullable();
             $table->boolean('correct')->nullable();
-            $table->text('ai_feedback')->nullable();
             $table->timestamps();
-            
-            $table->index(['user_phone', 'created_at']);
+
         });
     }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('status', ['to_study', 'studying', 'reviewing', 'consolidated']);
             $table->integer('priority')->default(1);
             $table->timestamp('created_at_notion');
+            $table->integer('repetitions')->default(0);
             $table->timestamp('last_review')->nullable();
             $table->timestamp('next_review')->nullable();
             $table->timestamp('status_change')->nullable();
